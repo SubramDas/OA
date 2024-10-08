@@ -1,0 +1,66 @@
+A subsequence of an array is formed by removing zero or more elements from an array without changing the order of the remaining elements. In a valid subsequence, each pair of adjacent elements of the subsequence has bitwise XOR equal to k. Note that any subsequence of length 1 is valid regardless of the value of k because there is no pair of adjacent elements in such a subsequence.   
+Given an array of integers and integer k, determine the length of the longest valid subsequence in the array.   
+
+
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MAXN = 1000; // Adjust based on constraints
+int memo[MAXN];
+
+// Recursive function with memoization
+int findMaxLen(int a[], int n, int k, int i, map<int, int>& map) {
+    // Base case: If the current index is out of bounds
+    if (i < 0) {
+        return 0;
+    }
+
+    // If already computed, return the memoized value
+    if (memo[i] != -1) {
+        return memo[i];
+    }
+
+    // Check if there's a subsequence ending with a[i] ^ k
+    int include = 1;
+    if (map.find(a[i] ^ k) != map.end()) {
+        include = map[a[i] ^ k] + 1;
+    }
+
+    // Store the maximum length of subsequence ending with a[i]
+    map[a[i]] = max(map[a[i]], include);
+
+    // Recursive call to find the length for previous elements
+    int exclude = findMaxLen(a, n, k, i - 1, map);
+
+    // Store the result in the memo table
+    return memo[i] = max(include, exclude);
+}
+
+// Main function
+int xorSubsequence(int a[], int n, int k) {
+    // Initialize memoization table to -1
+    fill(memo, memo + n, -1);
+
+    // Dictionary to store the length of longest subsequence ending at each element
+    map<int, int> map;
+    int ans = findMaxLen(a, n, k, n - 1, map);
+
+    // If the result is less than 2, return 0 as single elements don't count
+    return ans >= 2 ? ans : 0;
+}
+
+int main() {
+    // Input
+    int arr[] = {3, 2, 4, 3, 5};
+    int N = sizeof(arr) / sizeof(arr[0]);
+    int K = 1;
+
+    // Print the length of the longest subsequence
+    cout << xorSubsequence(arr, N, K);
+
+    return 0;
+}
