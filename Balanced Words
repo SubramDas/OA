@@ -1,0 +1,48 @@
+Problem: Balanced Words
+A word processor produces random words of lowercase English characters, which can be used for data analysis, puzzles, etc. The difference between two characters x and y is defined as the absolute difference between their positions in the English alphabet. For example:
+
+The difference between 'a' and 'z' is 25.
+The difference between 'f' and 'c' is 3.
+A word is considered balanced if the difference between any two adjacent characters does not exceed a given integer 
+𝑑
+
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+const int MOD = 1e9 + 7;
+
+// Memoization table
+vector<vector<int>> memo;
+
+int countBalancedWords(int length, int lastChar, int n, int d) {
+    // Base case: single character words
+    if (length == 1) return 1;
+
+    // Check if the result is already computed
+    if (memo[length][lastChar] != -1) return memo[length][lastChar];
+
+    int count = 0;
+    // Try all possible characters for the previous position
+    for (int prevChar = 0; prevChar < 26; ++prevChar) {
+        if (abs(lastChar - prevChar) <= d) {
+            count = (count + countBalancedWords(length - 1, prevChar, n, d)) % MOD;
+        }
+    }
+
+    // Memoize the result
+    return memo[length][lastChar] = count;
+}
+
+int balancedWords(int n, int d) {
+    memo.assign(n + 1, vector<int>(26, -1)); // Initialize memo table
+
+    int result = 0;
+    // Sum up all the balanced words of length n ending with any character
+    for (int lastChar = 0; lastChar < 26; ++lastChar) {
+        result = (result + countBalancedWords(n, lastChar, n, d)) % MOD;
+    }
+
+    return result;
+}
