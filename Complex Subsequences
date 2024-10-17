@@ -1,0 +1,28 @@
+
+You have an array of infinite length with the value of all elements as zero. You are also given the following:
+
+Two integers N and K
+In the next N lines, you are given three integers L, R, and X. This means that you have to add X to every element in the array from the index L to R (inclusive).
+Your task is to find a subsequence from this array that meets the following conditions:
+
+The subsequence should be of maximum length.
+It should also be the smallest lexicographically.
+The subsequence should form an increasing sequence of the form [Z, Z + K, Z + 2 * K, ..., Z + (L - 1) * K] for a value Z and length L.
+
+
+Efficient Range Updates
+To handle the range updates efficiently, we use a difference array. The steps are as follows:
+
+Initialize a difference array: Create a difference array diff of infinite length initialized to zero. Practically, this array can be managed dynamically using a map.
+
+Apply the operations:
+
+For each operation (L,R,X), update the difference array as follows:
+diff[L]+=X
+diff[R+1]−=X
+Convert the difference array to the actual array:
+
+Calculate the prefix sum to get the final values of the array after all operations are applied.
+
+After we have the map use a set to keep the sum of diff numbers 
+then for each element check if element + k is there or not
