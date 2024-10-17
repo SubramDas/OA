@@ -1,0 +1,17 @@
+
+
+You are given the following:
+
+An integer value N
+M pairs of distinct characters (lowercase English alphabets only)
+A pair of characters in the given Pairs holds a relation between them. The relation among the given pairs is also transitive which means if you consider two pairs (u, v) and (v, w) which holds relation, then pair (u, w) also holds the relation. Also, the relation says that those pairs of characters can not occur together in a formed string.   
+
+Task
+
+Determine the total number of strings of length N such that any string does not contain a pair of adjacent characters holding any relation. Since this number can be large, output it modulo 10^9 + 7
+
+
+Solution:
+
+DSU implementation by size
+If the character belongs to the same set size increases and then probability of taking and not taking
