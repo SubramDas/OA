@@ -1,0 +1,21 @@
+
+
+You are given a tree of n nodes and n-1 edges. Additionally, you are
+also given an array C of length n, where C[i] (1 ≤ i ≤ n) denotes the
+value of node i.
+
+Task
+
+Calculate the sum of medians of every simple path of odd length
+starting from node 1. (You should add median of node values, that is
+C[i])
+
+
+
+
+
+Solution:
+
+Keep a set and take out median from that
+traverse and put values of vertices when going to that node.
+If the set is odd size take out the median
