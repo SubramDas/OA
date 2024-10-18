@@ -1,0 +1,47 @@
+A function S(x) is defined as the sum of all the divisors of x. For example:
+
+S(4) = 1 + 2 + 4
+S(10) = 1 + 2 + 5 + 10
+
+Now let us define a function P(x) as the sum of S(y) where x % y == 0.
+
+You are given Q tasks. In each task, you are given two integers L and R.
+
+Determine the sum of the P(x) for all x from L to R, i.e., Σ(k=L)^R P(i).
+
+
+Solution:
+
+  
+#include <bits/stdc++.h>
+using namespace std;
+#define MAXN 1000000
+
+vector that stores the sum of divisors for each number 
+O(n* log log n)
+
+take the prefix sum of the array
+
+Then for each query:
+
+pref[r] - pref[l-1]
+
+int main()
+{
+    int n = 10; // for example
+    int i, j;
+    int sum = 0;
+    int divisors[MAXN+1] = {0}; // array to store the sum of divisors
+     
+    for (i = 1; i <= n; i++) {
+        for (j = i; j <= n; j += i) {
+            divisors[j] += i;
+        }
+    }
+ 
+    for (i = 1; i <= n; i++) {
+        sum += divisors[i];
+    }
+    cout<<"The sum of all divisors from 1 to "<<n<<" is "<<sum<<endl;
+    return 0;
+}
