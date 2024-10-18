@@ -1,0 +1,19 @@
+You have to manage a server that serves the requests of its clients who have subscribed to its paid service. You are given N clients who have taken the subscription to your server. [Li, Ri] denotes the time range in seconds for which the ith client makes its requests to the server, and Ai denotes the number of requests that the ith client makes per second.
+
+You have to design a server with X as the minimum serving capability of the server per second so that it is successful in serving all the requests. A server with a serving capability of X cannot serve more than X requests per second.
+
+Find the minimum serving capability of the server such that it is able to serve all the requests.
+
+Solution:
+Use efficient array difference approach
+
+Keep a map:
+
+suppose (1, 5) sec - 2 requests
+
+map[1] = 2
+map[6] = -2
+
+do for all 
+
+then iterate throught the map and take prefix sum and max of that sum
