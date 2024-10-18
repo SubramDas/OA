@@ -1,0 +1,69 @@
+Given an integer array nums of size N and an integer K. Find the largest positive number less than equal to 10^9 such that at least K numbers from the array nums are divisible by it.
+
+Solution:
+
+Getting all the divisors for each of the numbers
+
+Map containing how many numbers this divisor can divide
+set containing all the divisors
+
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <set>
+#include <cmath>
+using namespace std;
+
+// Function to find all divisors of a number
+vector<int> findDivisors(int num) {
+    vector<int> divisors;
+    for (int i = 1; i <= sqrt(num); i++) {
+        if (num % i == 0) {
+            divisors.push_back(i);
+            if (i != num / i) {  // Avoid pushing the square root twice
+                divisors.push_back(num / i);
+            }
+        }
+    }
+    return divisors;
+}
+
+// Function to find the largest divisor that divides at least K numbers
+int largestDivisor(const vector<int>& nums, int K) {
+    unordered_map<int, int> divisorCount;  // To count how many times a divisor appears
+    set<int> candidates;  // To store unique divisors
+    
+    // Iterate over all numbers in the array
+    for (int num : nums) {
+        vector<int> divisors = findDivisors(num);
+        for (int divisor : divisors) {
+            divisorCount[divisor]++;
+            candidates.insert(divisor);
+        }
+    }
+    
+    // Now, find the largest divisor with at least K numbers divisible
+    int bestDivisor = 0;
+    for (int divisor : candidates) {
+        if (divisorCount[divisor] >= K) {
+            bestDivisor = max(bestDivisor, divisor);
+        }
+    }
+    
+    return bestDivisor;
+}
+
+int main() {
+    int N, K;
+    cin >> N >> K;
+    vector<int> nums(N);
+    
+    for (int i = 0; i < N; i++) {
+        cin >> nums[i];
+    }
+    
+    int result = largestDivisor(nums, K);
+    cout << result << endl;
+    
+    return 0;
+}
