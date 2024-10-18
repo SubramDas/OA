@@ -1,0 +1,22 @@
+
+
+You call a number beautiful if it contains at least 1 bit '0' and at most 3 bits '0' in its binary representation.
+For example. 5 (101)₂ and 8 (1000), are beautiful numbers but numbers like 15 (1111)2 and 16
+(10000)2 are not. Strings in parentheses are the corresponding binary representations.
+
+You are given Q queries of the type L, R. consider all beautiful numbers between the range Land R
+(inclusive)
+
+Find the sum of cubes of all such beautiful numbers. Since the sum can be very large, output it modula
+998244353
+
+
+Solution:
+take the max number in the query i.e R
+loop from 0th bit to the last bit where R is set (say x)
+
+take mask = 1111 upto x;
+
+now 3 loops ( 0 to x-1, ...)
+at each position unset the bit and count the number of unset bits
+if number is inside the range L to R we can sum it in cubes
