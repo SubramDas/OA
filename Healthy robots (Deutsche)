@@ -1,0 +1,5 @@
+
+Given N robots in a line facing left or right with positive health. They move simultaneously and collide when they meet. The robot with less health is knocked out of the line, and the robot with more health continues moving in the same direction with its health reduced by the opponent's health. If two robots have the same health, both are knocked out. The health and direction of each robot are stored in a 2D array A of size N°2. where A[i][0] is the health and A[i][1] is the direction (0 for left, 1 for right). Find the health and direction of the robots that remain after all the collisions, in the same order as they appeared in the original line from 1 to N.
+
+
+Stack implementation (Asteroid Collision)
