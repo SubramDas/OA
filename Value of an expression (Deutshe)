@@ -1,0 +1,41 @@
+
+
+Given a sequence of n integers (a₁, a₂, ..., an). You are asked to perform the following operation and return the obtained result.
+
+For a given integer x, calculate the value of expression
+min(i=1, n) (fun(ai, ai+1, ..., ai+x-1))
+Here, fun(ai, ai+1, ..., ai+x-1) returns the value of the rightmost number with the highest number of distinct prime factors.
+
+In other words, if mi = fun(ai, ai+1, ..., ai+x-1), then you are required to find the value of min(mi).
+
+
+Solution:-
+
+Same concept as the below code. Just that now the array keeps track of how mny prime factors the number has;
+After getting the array.
+Take a set and do two pointer approach
+
+
+#include <bits/stdc++.h>
+using namespace std;
+#define MAXN 1000000
+
+int main()
+{
+	int n = 10; // for example
+	int i, j;
+	int sum = 0;
+	int divisors[MAXN+1] = {0}; // array to store the sum of divisors
+
+	for (i = 1; i <= n; i++) {
+		for (j = i; j <= n; j += i) {
+			divisors[j] += 1;
+		}
+	}
+
+	for (i = 1; i <= n; i++) {
+		sum += divisors[i];
+	}
+	cout<<"The sum of all divisors from 1 to "<<n<<" is "<<sum<<endl;
+	return 0;
+}
