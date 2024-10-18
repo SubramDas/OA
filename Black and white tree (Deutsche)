@@ -1,0 +1,43 @@
+
+
+Given a tree with N vertices labeled from 1 to N, rooted at vertex 1. The tree is an undirected graph with N-1 edges. Each edge i connects two vertices, ai, and bi. Each vertex i is colored either white (represented by '0') or black (represented by '1').   
+
+The beauty of a vertex i is the number of paths in its subtree that have end vertices of the opposite color.
+
+Find the beauty of all N vertices.
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+vector<int> dfs(int i, vector<vector<int>>& graph, unordered_set<int>& visited, vector<int>& result) {
+    if (visited.find(i) != visited.end()) {
+        return {0, 0};
+    }
+    visited.insert(i);
+    int black = 0, white = 0;
+    vector<int> numC;
+    for (auto j: graph[i]) {
+        numC = dfs(j, graph, visited, result);
+        black += numC[0];
+        white += numC[1];
+    }
+    string[i - 1] == '1' ? ++black : ++white;
+    result[i - 1] = black * white;
+    return {black, white};
+}
+
+vector<int> solve(int N, string Color, vector<vector<int>> Edges) {
+    vector<vector<int>> graph(N + 1);
+    unordered_set<int> visited;
+    vector<int> result(N);
+    
+    for (auto edge: Edges) {
+        graph[edge[0]].push_back(edge[1]);
+        graph[edge[1]].push_back(edge[0]);
+    }
+    
+    dfs(1, graph, visited, result);
+    return result;
+}
