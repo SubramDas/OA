@@ -1,0 +1,17 @@
+
+
+Given an array of size N containing integers, find the minimum possible sum that can be formed by adding the elements in the array. You can perform the following operation at most once:
+
+Select an index. If the sum of all the elements in the array up to the selected index is a multiple of the element present in the index, divide the sum up to the selected index by the element present in the index.
+
+After dividing, you do not have to add this element to the resultant sum.
+
+After this operation is performed, you will have to add the rest of the elements in the array to the resultant sum formed after the operation.
+
+Return the minimum possible result that can be formed after the operations.
+
+
+
+Solution :
+
+Prefix sum implementation
