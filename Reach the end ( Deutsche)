@@ -1,0 +1,8 @@
+
+You are given a matrix X of size N*M. You need to go from point (1, 1) to (N, M). From a point (i, j), you can either jump to (i+X, j) or (i, j+X+1). You cannot jump outside the matrix.
+
+Find the minimum number of moves needed to reach the point (N, M) from (1, 1). If it is not possible to do so, print -1.
+
+Solution:
+
+DP implementation
