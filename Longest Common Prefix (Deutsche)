@@ -1,0 +1,51 @@
+Problem Statement:
+
+You are given:
+1. A value n, which is the number of strings.
+2. A vector (array) of n strings.
+
+You need to find the total number of permutations of these strings that satisfy the following condition:
+
+- For any two strings, if they share a common prefix (longest common prefix substring), all the strings between them in the permutation must share at least that common prefix.
+
+### Example 1:
+
+Input:  
+n = 4  
+Strings = A, AA, AAA, AAAA
+
+Valid permutation:  
+A, AA, AAA, AAAA
+
+Invalid permutation:  
+AAA, A, AAAA, AA (Because the longest common prefix of AAA and AAAA is "AAA", but the second string A doesn't have this prefix.)
+
+Answer:  
+There are 12 valid permutations.
+
+### Example 2:
+
+Input:  
+n = 3  
+Strings = ABCRD, ABCWE, ABDFG
+
+Valid permutation:  
+ABCRD, ABCWE, ABDFG
+
+Invalid permutation:  
+ABCRD, ABDFG, ABCWE (Because ABCRD and ABCWE share a longer prefix than ABDFG in between)
+
+---
+
+You need to determine how many such valid permutations exist. The size of n can go up to 2000, and each string can be up to 1000 characters long.
+
+
+SOLUTION:
+
+Sort array
+check for adj strings and get prefix o(n*L)
+if( prefix size greater than prev take that and cnt = 2;
+else if equal cnt++;
+
+now permutation of n places if x places are already taken (cnt is the number of strings to be taken in batch)
+
