@@ -1,0 +1,68 @@
+Given an undirected tree with N nodes such that there exists a path between any two nodes. For the ith node, a positive integer value Ai is associated with it.
+
+You also have a special positive integer K and you may perform the following operation zero or more times on the given tree:
+
+Choose an edge and update the value of the nodes connected with that edge with Bitwise XOR of its current value and K. Formally, Ai = (Ai XOR K) for all i connected with the chosen edge.
+Find the maximum value of Σi=1NAi if you can perform the above operations any number of times.
+
+SOLUTION|:
+
+Bipartite graph solution
+as its told to xor its connected edges 
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+void dfs(int node, int parent, int color, vector<int>& colors, vector<vector<int>>& tree) {
+    colors[node] = color;
+    for (int neighbor : tree[node]) {
+        if (neighbor != parent) {
+            dfs(neighbor, node, 1 - color, colors, tree);
+        }
+    }
+}
+
+int max_sum_with_xor(int N, vector<int>& A, int K, vector<pair<int, int>>& edges) {
+    // Step 1: Build the tree (adjacency list representation)
+    vector<vector<int>> tree(N);
+    for (auto& edge : edges) {
+        int u = edge.first;
+        int v = edge.second;
+        tree[u].push_back(v);
+        tree[v].push_back(u);
+    }
+
+    // Step 2: Partition the tree using DFS into two sets (colors)
+    vector<int> colors(N, -1);
+    dfs(0, -1, 0, colors, tree);
+
+    // Step 3: Compute the sum for the two possible cases
+    long long sum_set_1 = 0;
+    long long sum_set_2 = 0;
+
+    for (int i = 0; i < N; i++) {
+        if (colors[i] == 0) {
+            sum_set_1 += A[i];          // Case where Set 1 is unchanged
+            sum_set_2 += A[i] ^ K;      // Case where Set 1 is XORed with K
+        } else {
+            sum_set_1 += A[i] ^ K;      // Case where Set 2 is XORed with K
+            sum_set_2 += A[i];          // Case where Set 2 is unchanged
+        }
+    }
+
+    // Step 4: Return the maximum of the two sums
+    return max(sum_set_1, sum_set_2);
+}
+
+int main() {
+    int N = 4;
+    vector<int> A = {3, 5, 2, 8};
+    int K = 4;
+    vector<pair<int, int>> edges = {{0, 1}, {1, 2}, {1, 3}};
+
+    int result = max_sum_with_xor(N, A, K, edges);
+    cout << "Maximum sum after XOR operations: " << result << endl;
+
+    return 0;
+}
