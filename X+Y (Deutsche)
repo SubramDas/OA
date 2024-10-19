@@ -1,0 +1,5 @@
+given an array of length n, where i'th element represent a chocolate of length array[i]. when you merge two chocolate of length x and y, cost of merging is x+y, and the resultant chocolate length becomes x+y, once merged replace it in the array. finally there will be only one chocolate left in the array, and the cost of merging will be z. you are supposed to return the minimum z possible
+
+SOLUTION:
+
+Min Heap probably
