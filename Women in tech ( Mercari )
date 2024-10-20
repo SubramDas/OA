@@ -1,0 +1,11 @@
+An aspiring programmer is gearing up for the upcoming Women's Cup coding competition. During the practice, the programmer comes across a question where the contestant is required to find the minimum number of operations required to make all the integers of a given array equal.
+
+In a single operation, one can flip any bit of any element of the array. Considering the given array, arr = [1, 2, 3], in one operation, either 1 can be made equal to 0, 3, 5, 9, etc., 2 can be made 0, 3, 6, 10, etc., or 3 can be made into 2, 1, 7, etc.
+
+Find the minimum operations required, which will help the programmer verify the answer.
+
+
+SOLUTION:
+
+Keep a frequency array to track the set bits for every number in the array
+check if the set bits are higher or the unset bits for each 31 bits sum up the min bits 
