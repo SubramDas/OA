@@ -1,0 +1,12 @@
+This newspaper, HackerRank News, distributed lottery tickets to everyone, and the winning lottery ID is described in the paper denoted by winnerID.
+
+In order to win the lottery, a customer having a lottery ID denoted by lotteryID needs to maximize the length of the longest common subsequence of the strings lotteryID and winnerID. To do so, the customer can perform up to k operations. In each operation, the customer can change any character in lotteryID either to its next or previous character.
+
+Find the maximum possible length of the longest common subsequence after at most k such operations.
+
+n = 100, k = 100
+
+SOLUTION:
+
+DP solution should work, n*n*k
+LCS Approach
