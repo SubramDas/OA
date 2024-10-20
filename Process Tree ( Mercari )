@@ -1,0 +1,52 @@
+
+A hypothetical chain of processes is represented as a tree. Processes are numbered starting at 1, incremented by 1. Every process spawns a number of processes equal to its process number. The first node, process Number 1, spawns 1 process, the second spawns 2 and so on. See the graph below. Given a process number, find the process number of its parent.
+
+
+SOLUTION:
+
+Keep track of child processes of parent
+for say parent 5
+parent 4 ended at 11
+so 5 range ( 11, 11 + 5)
+check if the child falls between this range
+
+O( sqrt(n) ) complexity => acceptable
+
+#include <iostream>
+using namespace std;
+
+int find_parent_process(int x) {
+    // Special case: process 1 has no parent
+    if (x == 1) return -1;  // No parent for process 1
+
+    int current_process = 1; // Start with process 1
+    int child_start = 2;     // Process 1 spawns process 2 as the first child
+
+    while (true) {
+        int child_end = child_start + current_process - 1;  // End of the range for current process
+
+        // Check if x lies within the child range of current_process
+        if (x >= child_start && x <= child_end) {
+            return current_process;  // Found the parent process
+        }
+
+        // Move to the next process
+        current_process++;
+        child_start = child_end + 1;  // Update the start of the next range
+    }
+}
+
+int main() {
+    int process_number;
+    cout << "Enter the process number: ";
+    cin >> process_number;
+
+    int parent = find_parent_process(process_number);
+    if (parent == -1) {
+        cout << "Process 1 has no parent." << endl;
+    } else {
+        cout << "The parent of process " << process_number << " is process " << parent << "." << endl;
+    }
+
+    return 0;
+}
